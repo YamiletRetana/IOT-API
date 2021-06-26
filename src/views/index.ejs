@@ -4,63 +4,229 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript">
+    function actualizar()
+    {location.reload(true);}
+    //funcion para actualizar la pagina cada 4 swegundos (4000 milisegundos)
+
+    setInterval("actualizar()",400000);
+    </script>
+
     <title>Plataforma de IOT</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.js"></script>
 </head>
-<body>
-    <nav class="navbar navbar-dark bg-dark"> 
-        <a href="/" class="navbar-brand">IOT</a>
-    </nav>
-    <pre>
-        <%= valores
-        %>
-    </pre>
-    <div class="container">
-        <div class="col-md-5"></div>
+<body style="background-color: rgb(253, 252, 252);">
+    
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+        <strong> 
+            <a href="/" class="navbar-brand">Intenet Of Things</a>  
+        </strong>
+        
+        <ul class="navbar-nav mr-auto">
+            &nbsp;
+            &nbsp;
+            &nbsp;
+
+            <li class="nav-itm">
+                <a href="/" class="link">Incio</a>  
+            </li>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <li class="nav-itm">
+                <a href="/" class="link">Servicios</a>  
+            </li>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            <li class="nav-itm">
+                <a href="/" class="link">Contactanos</a>  
+            </li>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+        </ul>
         <div class="card">
-            <div class="card-body"> 
-                <form action="/add" method="POST">
-                    <div class="form-group">
-                        <input type="text" name="temperatura" placeholder="Temperatura °C" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="humedad" placeholder="Humedad" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" name="distancia" placeholder="Distancia" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="date" name="fecha" placeholder="Fecha" class="form-control">
-                    </div>
-                    <button class="btn btn-primary">Registrar</button>
-                </form>
+            <canvas id="myChart" width="200" height="200"></canvas>
+        </div>
+        &nbsp;
+        <div class="card">
+            <canvas id="myChart2" width="200" height="200"></canvas>
+        </div>
+        &nbsp;
+        <div class="card">
+            <canvas id="myChart3" width="200" height="200"></canvas>
+        </div>
+        &nbsp;
+        <div class="card">
+            <canvas id="myChart4" width="200" height="200"></canvas>
+        </div>
+    </nav>
+    <pre></pre>
+    <center>
+        <div background="#CD5C5C">
+            <h1>
+                ULTRASONIC &nbsp; DISTANCE: &nbsp; <p></p> TEMPERATURE &nbsp; AND &nbsp; HUMIDITY  
+            </h1>
+        </div>
+    </center>
+    </br>
+    <center>
+        <div class="tow align-items-center">
+            <div class="col" style="padding: 20px;">
+                <img src="https://informesinternet.com/wp-content/uploads/2019/07/iot.png" height="500" width="700" class="img-fluit"> 
             </div>
         </div>
-
-        <div class="col-md-5"></div>
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Temperatura</th>
-                    <th>Humedad</th>
-                    <th>Distancia</th>
-                    <th>Fecha</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% for(var i = 0; i<valores.length; i++){ %>
-                    <tr>
-                        <td><%= i+1 %></td>
-                        <td><%= valores[i].temperatura %></td>
-                        <td><%= valores[i].humedad %></td>
-                        <td><%= valores[i].distancia %></td>
-                        <td><%= valores[i].fecha%></td>
-                    </tr>
-
-                <% } %>
-            </tbody>
-        </table>
+    </center>
+    
+<center>
+    <div class="container-dark-center">
+        <div class="col-md-5">
+            <div class="card text-center">
+                <div class="card-body"> 
+                    <form action="/add" method="POST">
+                        <h2>
+                            Complete &nbsp; los &nbsp; campos
+                        </h2>
+                        <div class="form-group">
+                            <input type="text" name="temperatura" placeholder="Temperatura °C" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="humedad" placeholder="Humedad" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="distancia" placeholder="Distancia" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="date" name="fecha" placeholder="Fecha" class="form-control">
+                        </div>
+                        <button class="btn btn-primary">Registrar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</body>
+</center>    
+
+    </br>
+</br>
+    <center>
+        <div class="col-md-9">
+            <table class="table table-bordered table-striped table-center">
+                <thead class="thead-dark thead-center">
+                    <tr>
+                        <th>#</th>
+                        <th>Temperatura</th>
+                        <th>Humedad</th>
+                        <th>Distancia</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(var i = 0; i<valores.length; i++){ %>
+                        <tr>
+                            <td><%= i+1 %></td>
+                            <td><%= valores[i].temperatura %></td>
+                            <td><%= valores[i].humedad %></td>
+                            <td><%= valores[i].distancia %></td>
+                            <td><%= valores[i].fecha%></td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+            
+        </div>
+        </center>
+        
+        <p class="text-center text-muted">VERSION 1.0.0 ITSRLL Company IOT @</p>
+    </body>
+
+    <script type="text/javascript">
+    <% var datos = valores.length-1 %>
+    var temp = <%= valores[datos].temperatura %>;
+    var hum = <%= valores[datos].humedad %>;
+    var dis = <%= valores[datos].distancia %>;
+
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var myChart= new Chart(ctx,{
+        type:"polarArea",
+        data:{
+            labels:["temperatura","humedad","distancia"],
+            datasets:[{
+                label:'Num datos',
+                data:[temp, hum, dis],
+                backgroundColor:[
+                    'rgb(250, 128, 114)',
+                    'rgb(233, 150, 122)',
+                    'rgb(255, 160, 122)'
+                ]
+            }]
+        }
+
+    });
+    </script>
+
+    <script type="text/javascript">
+    <% var datos = valores.length-1 %>
+    var temp = <%= valores[datos].temperatura %>;
+
+    var ctx = document.getElementById("myChart2").getContext("2d");
+    var myChart= new Chart(ctx,{
+        type:"doughnut",
+        data:{
+            labels:["temperatura"],
+            datasets:[{
+                label:'Num datos',
+                data:[temp],
+                backgroundColor:[
+                    'rgb(250, 128, 114)'
+                ]
+            }]
+        }
+
+    });
+    </script>
+
+<script type="text/javascript">
+    <% var datos = valores.length-1 %>
+    var hum = <%= valores[datos].humedad %>;
+
+    var ctx = document.getElementById("myChart3").getContext("2d");
+    var myChart= new Chart(ctx,{
+        type:"line",
+        data:{
+            labels:["humedad"],
+            datasets:[{
+                label:'Num datos',
+                data:[hum],
+                backgroundColor:[
+                    'rgb(233, 150, 122)'
+                ]
+            }]
+        }
+
+    });
+    </script>
+
+<script type="text/javascript">
+    <% var datos = valores.length-1 %>
+    var dis = <%= valores[datos].distancia %>;
+
+    var ctx = document.getElementById("myChart4").getContext("2d");
+    var myChart= new Chart(ctx,{
+        type:"bar",
+        data:{
+            labels:["distancia"],
+            datasets:[{
+                label:'Num datos',
+                data:[dis],
+                backgroundColor:[
+                    'rgb(255, 160, 122)'
+                ]
+            }]
+        }
+
+    });
+    </script>
 </html>
