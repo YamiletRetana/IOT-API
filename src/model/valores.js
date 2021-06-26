@@ -5,6 +5,9 @@ const Valor = new Schema({
     temperatura: String,
     humedad: String,
     distancia: String,
-    fecha: Date
+    fecha:{
+        type: Date,
+        default: Date.now
+    }
 });
 module.exports = mongoose.model('valores', Valor);
